@@ -57,16 +57,19 @@ export const METRICS = [
 export const FEATURES = [
   {
     title: "AI That Never Sleeps",
+    icon: "moon" as const,
     description:
       "Autonomous agents run around the clock — prospecting, personalizing, and booking while you sleep.",
   },
   {
     title: "Hyper-Personalized",
+    icon: "pen" as const,
     description:
       "Every email is written for the individual. No spray-and-pray. No generic templates.",
   },
   {
     title: "You Only Talk to Buyers",
+    icon: "calendar-check" as const,
     description:
       "We qualify before you ever get on a call. Your calendar fills with decision-makers, not tire-kickers.",
   },

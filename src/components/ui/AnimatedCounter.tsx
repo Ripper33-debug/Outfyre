@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { gsap } from "@/components/providers/AppProviders";
+import { useEffect, useRef, useState } from "react";
+import { useInView, animate } from "framer-motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 type CounterProps = {
@@ -16,38 +16,32 @@ export function AnimatedCounter({
   className = "",
 }: CounterProps) {
   const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true, amount: 0.5 });
   const reducedMotion = useReducedMotion();
+  const [display, setDisplay] = useState(`0${suffix}`);
 
   useEffect(() => {
-    if (!ref.current) return;
+    if (!isInView) return;
 
     if (reducedMotion) {
-      ref.current.textContent = `${value}${suffix}`;
+      setDisplay(`${value}${suffix}`);
       return;
     }
 
-    const obj = { val: 0 };
-
-    gsap.to(obj, {
-      val: value,
+    const controls = animate(0, value, {
       duration: 2,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: ref.current,
-        start: "top 85%",
-        toggleActions: "play none none none",
-      },
-      onUpdate: () => {
-        if (ref.current) {
-          ref.current.textContent = `${Math.round(obj.val)}${suffix}`;
-        }
+      ease: [0.22, 1, 0.36, 1],
+      onUpdate: (latest) => {
+        setDisplay(`${Math.round(latest)}${suffix}`);
       },
     });
-  }, [value, suffix, reducedMotion]);
+
+    return () => controls.stop();
+  }, [isInView, value, suffix, reducedMotion]);
 
   return (
     <span ref={ref} className={className}>
-      0{suffix}
+      {display}
     </span>
   );
 }

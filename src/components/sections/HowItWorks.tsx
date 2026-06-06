@@ -50,39 +50,41 @@ function StepIcon({ type }: { type: (typeof PROCESS_STEPS)[number]["icon"] }) {
 }
 
 export function HowItWorks() {
-  const sectionRef = useRef<HTMLElement>(null);
+  const pinRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const reducedMotion = useReducedMotion();
 
   useEffect(() => {
-    if (reducedMotion || !sectionRef.current || !trackRef.current) return;
+    if (reducedMotion || !pinRef.current || !trackRef.current) return;
 
-    const section = sectionRef.current;
+    const pin = pinRef.current;
     const track = trackRef.current;
 
     const ctx = gsap.context(() => {
-      const scrollWidth = track.scrollWidth - window.innerWidth;
+      const getScrollDistance = () =>
+        Math.max(0, track.scrollWidth - window.innerWidth);
 
       gsap.to(track, {
-        x: -scrollWidth,
+        x: () => -getScrollDistance(),
         ease: "none",
         scrollTrigger: {
-          trigger: section,
+          trigger: pin,
           start: "top top",
-          end: () => `+=${scrollWidth}`,
+          end: () => `+=${getScrollDistance()}`,
           pin: true,
           scrub: 1,
           invalidateOnRefresh: true,
+          anticipatePin: 1,
         },
       });
-    }, section);
+    }, pin);
 
     return () => ctx.revert();
   }, [reducedMotion]);
 
   return (
-    <section id="how-it-works" ref={sectionRef} className="relative bg-void">
-      <div className="section-padding pb-12">
+    <section id="how-it-works" className="relative bg-void">
+      <div className="px-6 md:px-12 lg:px-20 pt-12 pb-6">
         <ScrollReveal>
           <p className="text-ember text-sm font-medium tracking-widest uppercase mb-4">
             Process
@@ -93,10 +95,10 @@ export function HowItWorks() {
         </ScrollReveal>
       </div>
 
-      <div className="overflow-hidden">
+      <div ref={pinRef} className="overflow-hidden">
         <div
           ref={trackRef}
-          className={`flex gap-8 px-6 md:px-12 lg:px-20 pb-24 ${
+          className={`flex gap-8 px-6 md:px-12 lg:px-20 pb-16 ${
             reducedMotion ? "flex-wrap" : "w-max"
           }`}
         >
