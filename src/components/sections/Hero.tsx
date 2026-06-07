@@ -15,7 +15,11 @@ const HeroBackground3D = dynamic(
   { ssr: false }
 );
 
-const headline = "We start the fire.".split(" ");
+// Alt headlines:
+//   "We start the fire." — original energy, works as brand line
+//   "AI tools. Built to last." — emphasizes longevity + AI-first
+//   "Your platform. Powered by AI." — leads with platform + AI layer
+const headline = "We build AI tools.".split(" ");
 
 export function Hero() {
   const { openBooking } = useBooking();
@@ -54,7 +58,7 @@ export function Hero() {
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-ember opacity-75" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-ember" />
           </span>
-          AI-Powered Outbound · Now Accepting Clients
+          AI Studio + Web Platform · Now Accepting Clients
         </motion.div>
 
         <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-extrabold tracking-tight text-white mb-8">
@@ -78,8 +82,8 @@ export function Hero() {
           transition={{ delay: reducedMotion ? 0 : 0.7, duration: 0.8 }}
           className="mx-auto max-w-2xl text-lg md:text-xl text-muted leading-relaxed mb-12"
         >
-          AI-powered outbound that fills your calendar with qualified sales
-          meetings — automatically.
+          Custom AI systems and the websites that power them — built, hosted,
+          and evolved as one ongoing partnership.
         </motion.p>
 
         <motion.div

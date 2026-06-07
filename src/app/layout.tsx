@@ -28,20 +28,21 @@ const syne = Syne({
 });
 
 export const metadata: Metadata = {
-  title: "OUTFYRE — AI-Powered Outbound That Fills Your Calendar",
+  title: "OUTFYRE — Custom AI Tools & Managed Web Platforms",
   description:
-    "AI-powered outbound that fills your calendar with qualified sales meetings — automatically. 10+ meetings per month guaranteed.",
+    "We build custom AI tools and the websites that power them — designed, hosted, and evolved as one ongoing partnership.",
   keywords: [
-    "AI lead generation",
-    "outbound sales",
-    "B2B meetings",
-    "sales automation",
+    "custom AI tools",
+    "web design",
+    "managed hosting",
+    "AI chatbots",
+    "web development",
     "OUTFYRE",
   ],
   openGraph: {
-    title: "OUTFYRE — We Start The Fire",
+    title: "OUTFYRE — We Build AI Tools",
     description:
-      "AI-powered outbound that fills your calendar with qualified sales meetings.",
+      "Custom AI systems and the platforms they live on — built, hosted, and evolved together.",
     type: "website",
   },
 };

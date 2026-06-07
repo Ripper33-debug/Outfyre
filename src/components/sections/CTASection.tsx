@@ -35,10 +35,11 @@ export function CTASection() {
       <div className="relative max-w-4xl mx-auto text-center">
         <ScrollReveal>
           <h2 className="font-display text-4xl md:text-5xl lg:text-7xl font-extrabold text-white mb-6">
-            Ready to fill your pipeline?
+            Ready to build something that lasts?
           </h2>
           <p className="text-lg md:text-xl text-white/70 mb-10 max-w-2xl mx-auto">
-            First month at $500. No contracts. Cancel anytime.
+            Let&apos;s talk about your platform, your AI tools, and a partnership
+            that grows with you.
           </p>
           <MagneticButton size="lg" onClick={openBooking}>
             Book Your Free Strategy Call

@@ -18,10 +18,11 @@ export function Pricing() {
           Pricing
         </p>
         <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-4">
-          Simple, transparent pricing
+          Build once. Partner ongoing.
         </h2>
         <p className="text-muted max-w-xl mx-auto">
-          First month at $500. No contracts. Cancel anytime.
+          A website build to get you live, managed hosting to keep you running,
+          and a custom AI retainer to keep you ahead.
         </p>
       </ScrollReveal>
 
@@ -59,7 +60,7 @@ export function Pricing() {
                 )}
               </div>
               <p className="text-ember text-sm font-medium mb-8">
-                {tier.meetings}
+                {tier.subtitle}
               </p>
 
               <ul className="space-y-3 mb-10 flex-1">

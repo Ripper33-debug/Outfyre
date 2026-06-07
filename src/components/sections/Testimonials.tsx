@@ -53,14 +53,25 @@ export function Testimonials() {
       >
         {TESTIMONIALS.map((t, i) => (
           <motion.div
-            key={t.name}
+            key={`${t.name}-${i}`}
             className="flex-shrink-0 w-[85vw] md:w-[400px] snap-center"
             initial={reducedMotion ? undefined : { opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.1, duration: 0.6 }}
           >
-            <div className="h-full p-8 rounded-2xl bg-surface border border-white/[0.06] flex flex-col">
+            <div
+              className={`h-full p-8 rounded-2xl bg-surface border flex flex-col ${
+                t.isPlaceholder
+                  ? "border-ember/20 border-dashed"
+                  : "border-white/[0.06]"
+              }`}
+            >
+              {t.isPlaceholder && (
+                <span className="text-xs text-ember/70 uppercase tracking-widest mb-3">
+                  Placeholder
+                </span>
+              )}
               <div className="text-ember text-4xl font-serif mb-4">&ldquo;</div>
               <p className="text-white/90 leading-relaxed flex-1 mb-8">
                 {t.quote}
