@@ -21,7 +21,7 @@ type MagneticButtonProps = {
 
 const variants = {
   primary:
-    "bg-gradient-ember text-white shadow-ember hover:shadow-ember-lg border border-transparent",
+    "bg-gradient-ember text-white border border-transparent",
   ghost:
     "bg-transparent text-cream border border-white/10 hover:border-ember/40 hover:bg-white/[0.03]",
   outline:
@@ -47,8 +47,8 @@ export function MagneticButton({
   const reducedMotion = useReducedMotion();
   const [isHovered, setIsHovered] = useState(false);
 
-  const x = useSpring(0, { stiffness: 300, damping: 20 });
-  const y = useSpring(0, { stiffness: 300, damping: 20 });
+  const x = useSpring(0, { stiffness: 280, damping: 18 });
+  const y = useSpring(0, { stiffness: 280, damping: 18 });
 
   const handleMouseMove = (e: MouseEvent<HTMLButtonElement>) => {
     if (reducedMotion || !ref.current) return;
@@ -58,10 +58,10 @@ export function MagneticButton({
     const distX = e.clientX - centerX;
     const distY = e.clientY - centerY;
     const distance = Math.sqrt(distX ** 2 + distY ** 2);
-    const maxDist = 120;
+    const maxDist = 140;
 
     if (distance < maxDist) {
-      const strength = (1 - distance / maxDist) * 0.35;
+      const strength = (1 - distance / maxDist) * 0.4;
       x.set(distX * strength);
       y.set(distY * strength);
     } else {
@@ -76,6 +76,8 @@ export function MagneticButton({
     setIsHovered(false);
   };
 
+  const isPrimary = variant === "primary";
+
   return (
     <motion.button
       ref={ref}
@@ -88,8 +90,19 @@ export function MagneticButton({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={handleMouseLeave}
       whileTap={reducedMotion ? undefined : { scale: 0.97 }}
-      animate={reducedMotion ? undefined : { scale: isHovered ? 1.02 : 1 }}
-      transition={{ type: "spring", stiffness: 400, damping: 25 }}
+      animate={
+        reducedMotion
+          ? undefined
+          : {
+              scale: isHovered ? 1.03 : 1,
+              boxShadow: isHovered && isPrimary
+                ? "0 0 40px rgba(255,106,61,0.45), 0 0 80px rgba(255,45,120,0.2)"
+                : isPrimary
+                  ? "0 0 20px rgba(255,106,61,0.15)"
+                  : "0 0 0px transparent",
+            }
+      }
+      transition={{ type: "spring", stiffness: 400, damping: 22 }}
       onClick={onClick}
     >
       {children}

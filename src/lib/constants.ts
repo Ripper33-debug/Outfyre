@@ -74,36 +74,78 @@ export const PIPELINE_STAGES = [
   { label: "Meeting booked", agent: "CEO Agent" },
 ] as const;
 
-export const SERVICES = [
+export const HOW_IT_WORKS_STEPS = [
   {
-    name: "AI Outbound Engine",
-    tagline: "Monthly retainer",
+    number: "01",
+    title: "Discovery & ICP mapping",
     description:
-      "Your full multi-agent outbound system — built, deployed, and run for you every month. Prospecting, personalization, outreach, and booking on autopilot.",
-    highlight: "10+ qualified meetings/month",
-    icon: "rocket" as const,
-    features: [
-      "5-agent AI system (CEO → Qualifier)",
-      "ICP research & list building",
-      "Hyper-personalized sequences",
-      "Calendar booking integration",
-      "Weekly performance reporting",
-    ],
+      "We deep-dive into your ideal customer, offer, and sales motion — then architect the multi-agent system around your exact revenue goals.",
   },
   {
-    name: "AI Ops & Automation",
-    tagline: "Monthly retainer",
+    number: "02",
+    title: "Deploy your AI team",
     description:
-      "Custom AI workflows that eliminate manual ops — internal automations, data pipelines, and intelligent tools built and maintained on retainer.",
-    highlight: "Ongoing build + maintenance",
-    icon: "workflow" as const,
-    features: [
-      "Workflow audit & strategy",
-      "Custom AI automations",
-      "CRM & tool integrations",
-      "Monthly optimization cycles",
-      "Dedicated AI engineer",
+      "Five specialized agents go live: Researcher, Copywriter, Outreach Manager, Qualifier, and CEO orchestrator — fully configured for your market.",
+  },
+  {
+    number: "03",
+    title: "Outbound runs daily",
+    description:
+      "Fresh prospect lists, personalized outreach, and reply handling across email and LinkedIn — 24/7, without your team lifting a finger.",
+  },
+  {
+    number: "04",
+    title: "Meetings hit your calendar",
+    description:
+      "Qualified buyers book directly. 10+ meetings per month, every month — with weekly reports on opens, replies, and pipeline.",
+  },
+] as const;
+
+export const SERVICES = [
+  {
+    label: "01 / OUTBOUND",
+    name: "AI Outbound Engine",
+    headline: "Your outbound team, run by AI.",
+    subhead:
+      "A full multi-agent system that finds your buyers, writes the message, sends it, handles replies, and qualifies the lead — dropping booked meetings straight into your calendar.",
+    icon: "rocket" as const,
+    buildHeading: null,
+    buildItems: [] as readonly string[],
+    monthlyHeading: "What you get every month:",
+    monthlyItems: [
+      "Fresh, ICP-matched prospect lists built and verified by our Researcher agent",
+      "Personalized outreach written per-prospect — no spray-and-pray templates",
+      "Daily sending + reply handling across email and LinkedIn",
+      "Every lead qualified before it hits your calendar",
+      "Booked meetings delivered to you, ready to close",
+      "Weekly performance reports — opens, replies, meetings, pipeline",
     ],
+    highlight: "10+ qualified meetings a month. Every month.",
+    closingLine: null,
+  },
+  {
+    label: "02 / AI OPS",
+    name: "AI Ops & Automation",
+    headline: "We build the AI into your business — then keep it running.",
+    subhead:
+      "Custom AI systems that take the repetitive work off your team's plate. We design it, ship it, and tune it every month so it keeps getting sharper.",
+    icon: "workflow" as const,
+    buildHeading: "What we build (and maintain):",
+    buildItems: [
+      "Custom AI assistants trained on your business",
+      "RFP & proposal drafting that cuts hours to minutes",
+      "Automated lead scoring and CRM workflows",
+      "Internal knowledge bots your team can actually ask questions",
+      "Live reporting dashboards that pull it all together",
+    ],
+    monthlyHeading: "What you get every month:",
+    monthlyItems: [
+      "A new automation or improvement shipped — your system keeps growing",
+      "Ongoing tuning, monitoring, and fixes",
+      "Direct support, no ticket queue",
+    ],
+    highlight: null,
+    closingLine: "We don't hand you a tool and disappear. We run it with you.",
   },
 ] as const;
 

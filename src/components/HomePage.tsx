@@ -3,6 +3,7 @@
 import { Navigation } from "@/components/sections/Navigation";
 import { Hero } from "@/components/sections/Hero";
 import { SocialProof } from "@/components/sections/SocialProof";
+import { HowItWorksPinned } from "@/components/sections/HowItWorksPinned";
 import { AgentOrgChart } from "@/components/sections/AgentOrgChart";
 import { PipelineSection } from "@/components/sections/PipelineSection";
 import { ServicesSection } from "@/components/sections/ServicesSection";
@@ -14,16 +15,19 @@ import { CTASection } from "@/components/sections/CTASection";
 import { Footer } from "@/components/sections/Footer";
 import { CustomCursor } from "@/components/ui/CustomCursor";
 import { NoiseOverlay } from "@/components/effects/NoiseOverlay";
+import { ScrollProgressBar } from "@/components/effects/ScrollProgressBar";
 
 export function HomePage() {
   return (
     <>
+      <ScrollProgressBar />
       <NoiseOverlay />
       <CustomCursor />
       <Navigation />
       <main>
         <Hero />
         <SocialProof />
+        <HowItWorksPinned />
         <AgentOrgChart />
         <PipelineSection />
         <ServicesSection />
