@@ -19,8 +19,8 @@ function FlameIcon({ className = "" }: { className?: string }) {
       />
       <defs>
         <linearGradient id="flame-gradient" x1="12" y1="2" x2="12" y2="19">
-          <stop stopColor="#FF4500" />
-          <stop offset="1" stopColor="#C41E3A" />
+          <stop stopColor="#FF6A3D" />
+          <stop offset="1" stopColor="#FF2D78" />
         </linearGradient>
       </defs>
     </svg>

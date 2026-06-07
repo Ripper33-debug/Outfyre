@@ -4,7 +4,6 @@ import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { EmberParticles } from "@/components/effects/EmberParticles";
-import { useBooking } from "@/components/providers/AppProviders";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 const HeroBackground3D = dynamic(
@@ -15,18 +14,17 @@ const HeroBackground3D = dynamic(
   { ssr: false }
 );
 
-// Alt headlines:
-//   "We start the fire." — original energy, works as brand line
-//   "AI tools. Built to last." — emphasizes longevity + AI-first
-//   "Your platform. Powered by AI." — leads with platform + AI layer
-const headline = "We build AI tools.".split(" ");
+const headline = "Your AI growth team. On retainer.".split(" ");
 
 export function Hero() {
-  const { openBooking } = useBooking();
   const reducedMotion = useReducedMotion();
 
   const scrollToHow = () => {
     document.querySelector("#how-it-works")?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const scrollToContact = () => {
+    document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
   };
 
   const wordVariants = {
@@ -35,7 +33,7 @@ export function Hero() {
       opacity: 1,
       y: 0,
       transition: {
-        delay: reducedMotion ? 0 : 0.15 + i * 0.12,
+        delay: reducedMotion ? 0 : 0.12 + i * 0.08,
         duration: 0.8,
         ease: [0.22, 1, 0.36, 1] as const,
       },
@@ -46,22 +44,23 @@ export function Hero() {
     <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
       <HeroBackground3D />
       <EmberParticles />
+      <div className="absolute inset-0 bg-gradient-glow opacity-60 pointer-events-none" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-12 lg:px-20 pt-32 pb-24 text-center">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="mb-8 inline-flex items-center gap-2 rounded-full border border-ember/20 bg-ember/5 px-4 py-1.5 text-xs font-medium text-ember backdrop-blur-sm"
+          className="mb-8 inline-flex items-center gap-2 rounded-full border border-ember/20 bg-ember/5 px-4 py-1.5 font-mono text-xs text-ember backdrop-blur-sm"
         >
           <span className="relative flex h-2 w-2">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-ember opacity-75" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-ember" />
           </span>
-          AI Studio + Web Platform · Now Accepting Clients
+          AI Growth Team · Now Accepting Retainer Clients
         </motion.div>
 
-        <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-extrabold tracking-tight text-white mb-8">
+        <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold tracking-tight text-cream mb-8 leading-[1.05]">
           {headline.map((word, i) => (
             <motion.span
               key={i}
@@ -79,21 +78,22 @@ export function Hero() {
         <motion.p
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: reducedMotion ? 0 : 0.7, duration: 0.8 }}
+          transition={{ delay: reducedMotion ? 0 : 0.65, duration: 0.8 }}
           className="mx-auto max-w-2xl text-lg md:text-xl text-muted leading-relaxed mb-12"
         >
-          Custom AI systems and the websites that power them — built, hosted,
-          and evolved as one ongoing partnership.
+          We build and run a multi-agent AI system that books your sales team{" "}
+          <span className="text-cream font-medium">10+ qualified meetings</span>{" "}
+          every month — done for you, every month.
         </motion.p>
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: reducedMotion ? 0 : 0.9, duration: 0.8 }}
+          transition={{ delay: reducedMotion ? 0 : 0.85, duration: 0.8 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <MagneticButton size="lg" onClick={openBooking}>
-            Get Started
+          <MagneticButton size="lg" onClick={scrollToContact}>
+            Book a Call
           </MagneticButton>
           <MagneticButton size="lg" variant="ghost" onClick={scrollToHow}>
             See How It Works
@@ -107,9 +107,7 @@ export function Hero() {
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
       >
-        <span className="text-xs text-muted tracking-widest uppercase">
-          Scroll
-        </span>
+        <span className="label-mono">Scroll</span>
         <div className="animate-scroll-bounce">
           <svg
             width="24"
@@ -129,7 +127,7 @@ export function Hero() {
         </div>
       </motion.div>
 
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-void to-transparent z-[2]" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-charcoal to-transparent z-[2]" />
     </section>
   );
 }

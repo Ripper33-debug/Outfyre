@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef, type ReactNode } from "react";
-import { gsap, ScrollTrigger } from "@/components/providers/AppProviders";
+import { useRef, type ReactNode } from "react";
+import { motion, useInView } from "framer-motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 type ScrollRevealProps = {
@@ -15,47 +15,29 @@ export function ScrollReveal({
   children,
   className = "",
   delay = 0,
-  y = 60,
+  y = 48,
 }: ScrollRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, amount: 0.15, margin: "0px 0px -60px 0px" });
   const reducedMotion = useReducedMotion();
 
-  useEffect(() => {
-    if (reducedMotion || !ref.current) return;
-
-    const el = ref.current;
-
-    gsap.fromTo(
-      el,
-      { opacity: 0, y },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        delay,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: el,
-          start: "top 85%",
-          toggleActions: "play none none none",
-        },
-      }
-    );
-
-    return () => {
-      ScrollTrigger.getAll().forEach((st) => {
-        if (st.trigger === el) st.kill();
-      });
-    };
-  }, [reducedMotion, delay, y]);
-
   return (
-    <div
+    <motion.div
       ref={ref}
       className={className}
-      style={reducedMotion ? undefined : { opacity: 0 }}
+      initial={reducedMotion ? false : { opacity: 0, y }}
+      animate={
+        reducedMotion || isInView
+          ? { opacity: 1, y: 0 }
+          : { opacity: 0, y }
+      }
+      transition={{
+        duration: 0.7,
+        delay: reducedMotion ? 0 : delay,
+        ease: [0.22, 1, 0.36, 1],
+      }}
     >
       {children}
-    </div>
+    </motion.div>
   );
 }

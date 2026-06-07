@@ -28,21 +28,21 @@ const syne = Syne({
 });
 
 export const metadata: Metadata = {
-  title: "OUTFYRE — Custom AI Tools & Managed Web Platforms",
+  title: "OUTFYRE — Your AI Growth Team on Retainer",
   description:
-    "We build custom AI tools and the websites that power them — designed, hosted, and evolved as one ongoing partnership.",
+    "We build and run a multi-agent AI system that books your sales team 10+ qualified meetings every month — done for you, every month.",
   keywords: [
-    "custom AI tools",
-    "web design",
-    "managed hosting",
-    "AI chatbots",
-    "web development",
+    "AI growth team",
+    "AI outbound",
+    "multi-agent AI",
+    "sales meetings",
+    "AI retainer",
     "OUTFYRE",
   ],
   openGraph: {
-    title: "OUTFYRE — We Build AI Tools",
+    title: "OUTFYRE — Your AI Growth Team. On Retainer.",
     description:
-      "Custom AI systems and the platforms they live on — built, hosted, and evolved together.",
+      "Multi-agent AI system that books 10+ qualified meetings per month. Built and run for you.",
     type: "website",
   },
 };
@@ -55,7 +55,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${syne.variable} bg-void text-white antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${syne.variable} bg-charcoal text-cream antialiased`}
       >
         <AppProviders>{children}</AppProviders>
       </body>

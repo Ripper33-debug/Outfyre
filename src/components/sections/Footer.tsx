@@ -5,7 +5,7 @@ import { NAV_LINKS, SOCIAL_LINKS } from "@/lib/constants";
 import { FlameIcon } from "@/components/ui/FlameIcon";
 
 const SOCIAL_ICONS: Record<(typeof SOCIAL_LINKS)[number]["label"], ReactNode> = {
-  Twitter: (
+  X: (
     <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor">
       <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
     </svg>
@@ -23,32 +23,32 @@ export function Footer() {
   };
 
   return (
-    <footer className="relative bg-void border-t border-transparent">
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-fire opacity-50" />
+    <footer className="relative bg-charcoal border-t border-white/[0.05]">
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-ember opacity-50" />
 
       <div className="mx-auto max-w-7xl px-6 md:px-12 lg:px-20 py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           <div className="md:col-span-2">
             <div className="flex items-center gap-2 mb-4">
               <FlameIcon className="h-6 w-6" />
-              <span className="font-display text-xl font-extrabold text-white">
+              <span className="font-display text-xl font-extrabold text-cream">
                 OUTFYRE
               </span>
             </div>
             <p className="text-muted text-sm leading-relaxed max-w-sm">
-              We build custom AI tools and the platforms they live on — designed,
-              hosted, and evolved as one ongoing partnership.
+              Your AI growth team on retainer. We build and run multi-agent
+              systems that book 10+ qualified meetings every month.
             </p>
           </div>
 
           <div>
-            <h4 className="text-white font-medium text-sm mb-4">Navigation</h4>
+            <h4 className="label-mono text-cream mb-4">Navigation</h4>
             <ul className="space-y-3">
               {NAV_LINKS.map((link) => (
                 <li key={link.href}>
                   <button
                     onClick={() => scrollTo(link.href)}
-                    className="text-sm text-muted hover:text-white transition-colors"
+                    className="text-sm text-muted hover:text-cream transition-colors"
                     data-cursor="hover"
                   >
                     {link.label}
@@ -59,7 +59,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="text-white font-medium text-sm mb-4">Connect</h4>
+            <h4 className="label-mono text-cream mb-4">Connect</h4>
             <div className="flex gap-4">
               {SOCIAL_LINKS.map((social) => (
                 <a
@@ -78,12 +78,12 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="pt-8 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-muted">
+        <div className="pt-8 border-t border-white/[0.05] flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="font-mono text-xs text-muted">
             &copy; {new Date().getFullYear()} OUTFYRE. All rights reserved.
           </p>
-          <p className="text-xs text-muted">
-            Built to burn. Designed to evolve.
+          <p className="font-mono text-xs text-muted">
+            Built to burn. Run on retainer.
           </p>
         </div>
       </div>

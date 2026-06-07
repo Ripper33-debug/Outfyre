@@ -5,11 +5,9 @@ import { motion } from "framer-motion";
 import { NAV_LINKS } from "@/lib/constants";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { FlameIcon } from "@/components/ui/FlameIcon";
-import { useBooking } from "@/components/providers/AppProviders";
 
 export function Navigation() {
   const [scrolled, setScrolled] = useState(false);
-  const { openBooking } = useBooking();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -19,8 +17,7 @@ export function Navigation() {
   }, []);
 
   const scrollTo = (href: string) => {
-    const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -43,7 +40,7 @@ export function Navigation() {
           }}
         >
           <FlameIcon className="h-6 w-6 transition-transform group-hover:scale-110" />
-          <span className="font-display text-xl font-extrabold tracking-tight text-white">
+          <span className="font-display text-xl font-extrabold tracking-tight text-cream">
             OUTFYRE
           </span>
         </a>
@@ -53,7 +50,7 @@ export function Navigation() {
             <li key={link.href}>
               <button
                 onClick={() => scrollTo(link.href)}
-                className="text-sm text-muted hover:text-white transition-colors duration-300 relative after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-ember after:transition-all hover:after:w-full"
+                className="text-sm text-muted hover:text-cream transition-colors duration-300 relative after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-gradient-ember after:transition-all hover:after:w-full"
                 data-cursor="hover"
               >
                 {link.label}
@@ -62,7 +59,10 @@ export function Navigation() {
           ))}
         </ul>
 
-        <MagneticButton size="sm" onClick={openBooking}>
+        <MagneticButton
+          size="sm"
+          onClick={() => scrollTo("#contact")}
+        >
           Book a Call
         </MagneticButton>
       </nav>

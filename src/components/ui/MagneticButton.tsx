@@ -21,11 +21,11 @@ type MagneticButtonProps = {
 
 const variants = {
   primary:
-    "bg-gradient-fire text-white shadow-ember hover:shadow-ember-lg border border-transparent",
+    "bg-gradient-ember text-white shadow-ember hover:shadow-ember-lg border border-transparent",
   ghost:
-    "bg-transparent text-white border border-white/20 hover:border-ember/50 hover:bg-white/[0.03]",
+    "bg-transparent text-cream border border-white/10 hover:border-ember/40 hover:bg-white/[0.03]",
   outline:
-    "bg-transparent text-ember border border-ember/40 hover:bg-ember/10 hover:border-ember",
+    "bg-transparent text-ember border border-ember/30 hover:bg-ember/10 hover:border-ember/60",
 };
 
 const sizes = {

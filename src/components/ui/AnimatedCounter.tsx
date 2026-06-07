@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback } from "react";
-import { animate } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { useInView, animate } from "framer-motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 type CounterProps = {
@@ -23,14 +23,19 @@ export function AnimatedCounter({
   decimals = 0,
   className = "",
 }: CounterProps) {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, {
+    once: true,
+    amount: 0.5,
+    margin: "0px 0px -100px 0px",
+  });
   const reducedMotion = useReducedMotion();
-  const hasAnimated = useRef(false);
+  const hasRun = useRef(false);
   const [display, setDisplay] = useState(() => formatValue(0, decimals, suffix));
 
-  const runAnimation = useCallback(() => {
-    if (hasAnimated.current) return;
-    hasAnimated.current = true;
+  useEffect(() => {
+    if (!isInView || hasRun.current) return;
+    hasRun.current = true;
 
     if (reducedMotion) {
       setDisplay(formatValue(value, decimals, suffix));
@@ -46,43 +51,11 @@ export function AnimatedCounter({
     });
 
     return () => controls.stop();
-  }, [value, suffix, decimals, reducedMotion]);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    if (reducedMotion) {
-      setDisplay(formatValue(value, decimals, suffix));
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0]?.isIntersecting) {
-          runAnimation();
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.2, rootMargin: "0px 0px -5% 0px" }
-    );
-
-    observer.observe(el);
-
-    const rect = el.getBoundingClientRect();
-    const inView =
-      rect.top < window.innerHeight * 0.85 && rect.bottom > window.innerHeight * 0.15;
-    if (inView) {
-      runAnimation();
-      observer.disconnect();
-    }
-
-    return () => observer.disconnect();
-  }, [value, suffix, decimals, reducedMotion, runAnimation]);
+  }, [isInView, value, suffix, decimals, reducedMotion]);
 
   return (
-    <div ref={ref} className="inline-block">
-      <span className={className}>{display}</span>
-    </div>
+    <span ref={ref} className={className}>
+      {display}
+    </span>
   );
 }
