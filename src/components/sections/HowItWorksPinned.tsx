@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { gsap, ScrollTrigger } from "@/components/providers/AppProviders";
 import { HOW_IT_WORKS_STEPS } from "@/lib/constants";
 import { SectionHeader } from "@/components/ui/SectionHeader";
@@ -12,7 +12,7 @@ export function HowItWorksPinned() {
   const reducedMotion = useReducedMotion();
   const [activeStep, setActiveStep] = useState(0);
 
-  useEffect(() => {
+  const setupScrollPin = useCallback(() => {
     if (reducedMotion || !sectionRef.current || !pinRef.current) return;
 
     const section = sectionRef.current;
@@ -21,25 +21,60 @@ export function HowItWorksPinned() {
 
     const ctx = gsap.context(() => {
       ScrollTrigger.create({
+        id: "how-it-works-pin",
         trigger: section,
         start: "top top",
-        end: () => `+=${window.innerHeight * stepCount * 0.85}`,
-        pin: pin,
-        scrub: 0.6,
+        end: () => `+=${window.innerHeight * (stepCount - 0.25)}`,
+        pin,
+        pinSpacing: true,
+        scrub: 0.45,
         anticipatePin: 1,
         invalidateOnRefresh: true,
+        snap: {
+          snapTo: 1 / (stepCount - 1),
+          duration: { min: 0.12, max: 0.35 },
+          delay: 0.05,
+        },
         onUpdate: (self) => {
           const index = Math.min(
             stepCount - 1,
-            Math.floor(self.progress * stepCount)
+            Math.round(self.progress * (stepCount - 1))
           );
           setActiveStep(index);
         },
       });
     }, section);
 
+    ScrollTrigger.refresh();
+
     return () => ctx.revert();
   }, [reducedMotion]);
+
+  useEffect(() => {
+    if (reducedMotion) return;
+
+    let cleanup: (() => void) | undefined;
+
+    const init = () => {
+      cleanup?.();
+      cleanup = setupScrollPin();
+    };
+
+    if (window.__outfyreScrollReady) {
+      init();
+    } else {
+      window.addEventListener("outfyre:scroll-ready", init, { once: true });
+    }
+
+    const onResize = () => ScrollTrigger.refresh();
+    window.addEventListener("resize", onResize);
+
+    return () => {
+      window.removeEventListener("outfyre:scroll-ready", init);
+      window.removeEventListener("resize", onResize);
+      cleanup?.();
+    };
+  }, [reducedMotion, setupScrollPin]);
 
   if (reducedMotion) {
     return (
@@ -69,7 +104,10 @@ export function HowItWorksPinned() {
     <section id="how-it-works" ref={sectionRef} className="relative">
       <div className="absolute inset-0 bg-gradient-glow opacity-30 pointer-events-none" />
 
-      <div ref={pinRef} className="relative min-h-screen flex flex-col justify-center px-6 md:px-12 lg:px-20 py-20">
+      <div
+        ref={pinRef}
+        className="relative min-h-screen flex flex-col justify-center px-6 md:px-12 lg:px-20 py-20 will-change-transform"
+      >
         <SectionHeader
           label="How it works"
           headline="Four steps to a full pipeline"
@@ -78,7 +116,6 @@ export function HowItWorksPinned() {
         />
 
         <div className="relative max-w-3xl">
-          {/* Progress rail */}
           <div className="absolute left-0 top-0 bottom-0 w-px bg-white/[0.08] hidden sm:block">
             <div
               className="absolute left-0 w-full bg-gradient-ember transition-all duration-300 ease-out origin-top"
@@ -100,8 +137,8 @@ export function HowItWorksPinned() {
                     isActive
                       ? "border-ember/40 shadow-ember-lg opacity-100"
                       : isComplete
-                        ? "opacity-40"
-                        : "opacity-25"
+                        ? "opacity-50"
+                        : "opacity-30"
                   } ${isActive ? "translate-x-1" : ""}`}
                 >
                   <div className="flex items-start gap-4">
@@ -123,7 +160,7 @@ export function HowItWorksPinned() {
                       <p
                         className={`text-sm md:text-base leading-relaxed transition-all duration-500 ${
                           isActive
-                            ? "text-muted max-h-40 opacity-100"
+                            ? "text-muted max-h-48 opacity-100"
                             : "text-muted/50 max-h-0 opacity-0 overflow-hidden"
                         }`}
                       >

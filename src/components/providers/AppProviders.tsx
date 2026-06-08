@@ -29,16 +29,26 @@ export function useBooking() {
   return ctx;
 }
 
+declare global {
+  interface Window {
+    __outfyreScrollReady?: boolean;
+  }
+}
+
 export function AppProviders({ children }: { children: ReactNode }) {
   const reducedMotion = useReducedMotion();
   const lenisRef = useRef<Lenis | null>(null);
   const [isBookingOpen, setIsBookingOpen] = useState(false);
 
   useEffect(() => {
-    if (reducedMotion) return;
+    if (reducedMotion) {
+      window.__outfyreScrollReady = true;
+      window.dispatchEvent(new Event("outfyre:scroll-ready"));
+      return;
+    }
 
     const lenis = new Lenis({
-      duration: 1.4,
+      duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
       touchMultiplier: 1.5,
@@ -48,6 +58,27 @@ export function AppProviders({ children }: { children: ReactNode }) {
 
     lenis.on("scroll", ScrollTrigger.update);
 
+    ScrollTrigger.scrollerProxy(document.documentElement, {
+      scrollTop(value) {
+        if (arguments.length && value !== undefined) {
+          lenis.scrollTo(value, { immediate: true });
+        }
+        return lenis.scroll;
+      },
+      getBoundingClientRect() {
+        return {
+          top: 0,
+          left: 0,
+          width: window.innerWidth,
+          height: window.innerHeight,
+        };
+      },
+      pinType: document.documentElement.style.transform ? "transform" : "fixed",
+    });
+
+    const onRefresh = () => lenis.resize();
+    ScrollTrigger.addEventListener("refresh", onRefresh);
+
     const updateLenis = (time: number) => {
       lenis.raf(time * 1000);
     };
@@ -55,9 +86,20 @@ export function AppProviders({ children }: { children: ReactNode }) {
     gsap.ticker.add(updateLenis);
     gsap.ticker.lagSmoothing(0);
 
+    requestAnimationFrame(() => {
+      ScrollTrigger.refresh();
+      window.__outfyreScrollReady = true;
+      window.dispatchEvent(new Event("outfyre:scroll-ready"));
+    });
+
     return () => {
       gsap.ticker.remove(updateLenis);
+      ScrollTrigger.removeEventListener("refresh", onRefresh);
+      ScrollTrigger.scrollerProxy(document.documentElement, {});
+      ScrollTrigger.refresh();
       lenis.destroy();
+      lenisRef.current = null;
+      window.__outfyreScrollReady = false;
     };
   }, [reducedMotion]);
 
