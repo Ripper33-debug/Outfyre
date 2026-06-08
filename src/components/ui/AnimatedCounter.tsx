@@ -51,7 +51,7 @@ export function AnimatedCounter({
     return () => observer.disconnect();
   }, []);
 
-  const shouldStart = start === true || (start === undefined && selfInView);
+  const shouldStart = start === true || selfInView;
 
   useEffect(() => {
     if (!shouldStart || hasRun.current) return;

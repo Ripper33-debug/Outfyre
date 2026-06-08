@@ -156,7 +156,7 @@ export const SERVICES = [
     icon: "presence" as const,
     buildHeading: "What we build:",
     buildItems: [
-      "High-converting site on a modern stack (Next.js / Tailwind), not a bloated template",
+      "High-converting site built on a modern stack (Next.js / Tailwind), not a bloated template",
       "3D / interactive product visuals where it sells",
       "Managed hosting, security, and uptime",
       "Ongoing edits, A/B tests, and conversion tuning every month",
