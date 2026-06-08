@@ -147,6 +147,29 @@ export const SERVICES = [
     highlight: null,
     closingLine: "We don't hand you a tool and disappear. We run it with you.",
   },
+  {
+    label: "03 / PRESENCE",
+    name: "Presence",
+    headline: "The front door your pipeline walks through.",
+    subhead:
+      "We design, build, and host the site your outbound actually points to — fast, conversion-built, and run on the same retainer. No handoff to a separate web shop. The team booking your meetings also owns where those meetings land.",
+    icon: "presence" as const,
+    buildHeading: "What we build:",
+    buildItems: [
+      "High-converting site on a modern stack (Next.js / Tailwind), not a bloated template",
+      "3D / interactive product visuals where it sells",
+      "Managed hosting, security, and uptime",
+      "Ongoing edits, A/B tests, and conversion tuning every month",
+    ],
+    monthlyHeading: "What you get every month:",
+    monthlyItems: [
+      "Fully managed hosting + monitoring",
+      "Continuous conversion improvements tied to your outbound data",
+      "One team owning site → pipeline → close",
+    ],
+    highlight: null,
+    closingLine: "We don't just send traffic. We build where it lands.",
+  },
 ] as const;
 
 // TODO: Replace placeholder metrics with real numbers
@@ -154,7 +177,7 @@ export const METRICS = [
   { value: 10, suffix: "+", label: "qualified meetings per client/month", decimals: 0 },
   { value: 5, suffix: "", label: "AI agents running per client", decimals: 0 },
   { value: 24, suffix: "/7", label: "autonomous operation", decimals: 0 },
-  { value: 72, suffix: "hr", label: "avg. time to first reply", decimals: 0 },
+  { value: 1, suffix: "hr", label: "avg. time to first reply", decimals: 0 },
 ] as const;
 
 export const FEATURES = [
@@ -208,6 +231,20 @@ export const PRICING_TIERS = [
       "Internal ops tooling",
       "Monthly optimization cycles",
       "Dedicated AI engineer",
+    ],
+    highlighted: false,
+    cta: "Book a Call",
+  },
+  {
+    name: "Presence",
+    price: "From $149",
+    period: "/mo",
+    subtitle: "Site build + managed hosting",
+    features: [
+      "One-time build from $3,500",
+      "Managed hosting from $149/mo",
+      "3D / interactive add-ons quoted per project",
+      "Monthly conversion tuning included",
     ],
     highlighted: false,
     cta: "Book a Call",

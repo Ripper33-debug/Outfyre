@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Rocket, Workflow } from "lucide-react";
+import { Rocket, Workflow, Globe } from "lucide-react";
 import { SERVICES } from "@/lib/constants";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { StaggerReveal, StaggerItem } from "@/components/ui/StaggerReveal";
@@ -12,6 +12,7 @@ import { useReducedMotion } from "@/hooks/useReducedMotion";
 const ICON_MAP = {
   rocket: Rocket,
   workflow: Workflow,
+  presence: Globe,
 } as const;
 
 function ServiceList({
@@ -54,7 +55,7 @@ export function ServicesSection() {
         <SectionHeader
           label="Services"
           headline="Built and run on retainer"
-          description="Not one-off projects. Ongoing partnerships where we build, deploy, and operate your AI systems every month."
+          description="Builds that don't get abandoned — we ship them, then run them with you every month."
           align="center"
           className="mb-16"
         />

@@ -1,5 +1,7 @@
 "use client";
 
+import { useRef } from "react";
+import { useInView } from "framer-motion";
 import { METRICS } from "@/lib/constants";
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 import { SectionHeader } from "@/components/ui/SectionHeader";
@@ -7,8 +9,15 @@ import { StaggerReveal, StaggerItem } from "@/components/ui/StaggerReveal";
 import { TiltCard } from "@/components/ui/TiltCard";
 
 export function Results() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, {
+    once: true,
+    amount: 0.2,
+    margin: "0px 0px 0px 0px",
+  });
+
   return (
-    <section id="results" className="section-padding relative">
+    <section id="results" ref={sectionRef} className="section-padding relative">
       <div className="absolute inset-0 bg-gradient-glow opacity-20 pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto">
@@ -28,6 +37,7 @@ export function Results() {
                       value={metric.value}
                       suffix={metric.suffix}
                       decimals={metric.decimals}
+                      start={isInView}
                     />
                   </div>
                   <p className="text-muted text-sm leading-relaxed">
