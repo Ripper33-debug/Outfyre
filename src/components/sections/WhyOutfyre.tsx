@@ -18,7 +18,7 @@ export function WhyOutfyre() {
   const reducedMotion = useReducedMotion();
 
   return (
-    <section className="section-padding bg-surface/50 relative overflow-hidden">
+    <section className="section-padding bg-surface/25 backdrop-blur-sm relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-horizon opacity-40 pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto">

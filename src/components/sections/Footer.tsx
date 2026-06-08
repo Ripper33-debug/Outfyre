@@ -23,7 +23,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="relative bg-charcoal border-t border-white/[0.05]">
+    <footer className="relative z-10 bg-charcoal/60 backdrop-blur-xl border-t border-white/[0.05]">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-ember opacity-50" />
 
       <div className="mx-auto max-w-7xl px-6 md:px-12 lg:px-20 py-16">

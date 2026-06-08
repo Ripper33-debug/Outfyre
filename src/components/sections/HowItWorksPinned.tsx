@@ -43,7 +43,7 @@ export function HowItWorksPinned() {
 
   if (reducedMotion) {
     return (
-      <section id="how-it-works" className="section-padding bg-charcoal">
+      <section id="how-it-works" className="section-padding relative">
         <SectionHeader
           label="How it works"
           headline="Four steps to a full pipeline"
@@ -66,7 +66,7 @@ export function HowItWorksPinned() {
   }
 
   return (
-    <section id="how-it-works" ref={sectionRef} className="relative bg-charcoal">
+    <section id="how-it-works" ref={sectionRef} className="relative">
       <div className="absolute inset-0 bg-gradient-glow opacity-30 pointer-events-none" />
 
       <div ref={pinRef} className="relative min-h-screen flex flex-col justify-center px-6 md:px-12 lg:px-20 py-20">

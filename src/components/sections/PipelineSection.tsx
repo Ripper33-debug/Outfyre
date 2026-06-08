@@ -18,7 +18,7 @@ export function PipelineSection() {
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
   return (
-    <section className="section-padding bg-surface/50 relative overflow-hidden">
+    <section className="section-padding bg-surface/30 backdrop-blur-sm relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-horizon pointer-events-none" />
 
       <div className="relative max-w-5xl mx-auto">

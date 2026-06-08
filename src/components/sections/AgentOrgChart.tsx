@@ -131,7 +131,7 @@ export function AgentOrgChart() {
   const isInView = useInView(containerRef, { once: true, amount: 0.25 });
 
   return (
-    <section id="agents" className="relative bg-charcoal pt-4 pb-16 md:pb-24">
+    <section id="agents" className="relative pt-4 pb-16 md:pb-24">
       <div className="absolute inset-0 bg-gradient-glow opacity-40 pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-6 md:px-12 lg:px-20">

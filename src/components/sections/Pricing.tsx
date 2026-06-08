@@ -16,7 +16,7 @@ export function Pricing() {
   };
 
   return (
-    <section id="pricing" className="section-padding bg-charcoal relative">
+    <section id="pricing" className="section-padding relative">
       <div className="relative max-w-6xl mx-auto">
         <SectionHeader
           label="Pricing"

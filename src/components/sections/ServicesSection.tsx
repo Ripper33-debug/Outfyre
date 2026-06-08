@@ -47,7 +47,7 @@ export function ServicesSection() {
   };
 
   return (
-    <section id="services" className="section-padding bg-charcoal relative">
+    <section id="services" className="section-padding relative">
       <div className="absolute inset-0 bg-gradient-glow opacity-30 pointer-events-none" />
 
       <div className="relative max-w-4xl mx-auto">

@@ -15,16 +15,18 @@ import { CTASection } from "@/components/sections/CTASection";
 import { Footer } from "@/components/sections/Footer";
 import { CustomCursor } from "@/components/ui/CustomCursor";
 import { NoiseOverlay } from "@/components/effects/NoiseOverlay";
+import { SiteAuroraBackground } from "@/components/effects/HeroAuroraBackground";
 import { ScrollProgressBar } from "@/components/effects/ScrollProgressBar";
 
 export function HomePage() {
   return (
     <>
       <ScrollProgressBar />
+      <SiteAuroraBackground />
       <NoiseOverlay />
       <CustomCursor />
       <Navigation />
-      <main>
+      <main className="relative z-10">
         <Hero />
         <SocialProof />
         <HowItWorksPinned />

@@ -30,7 +30,7 @@ export function Testimonials() {
   const handleMouseUp = () => setIsDragging(false);
 
   return (
-    <section className="section-padding bg-surface/20 overflow-hidden">
+    <section className="section-padding bg-surface/20 backdrop-blur-sm overflow-hidden">
       <ScrollReveal className="mb-16">
         <p className="text-ember text-sm font-medium tracking-widest uppercase mb-4">
           Testimonials

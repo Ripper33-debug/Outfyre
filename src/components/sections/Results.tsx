@@ -8,7 +8,7 @@ import { TiltCard } from "@/components/ui/TiltCard";
 
 export function Results() {
   return (
-    <section id="results" className="section-padding bg-charcoal relative">
+    <section id="results" className="section-padding relative">
       <div className="absolute inset-0 bg-gradient-glow opacity-20 pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto">
