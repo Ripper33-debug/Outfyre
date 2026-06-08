@@ -1,20 +1,42 @@
 "use client";
 
-import { useRef } from "react";
-import { useInView } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import { METRICS } from "@/lib/constants";
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { StaggerReveal, StaggerItem } from "@/components/ui/StaggerReveal";
 import { TiltCard } from "@/components/ui/TiltCard";
 
+function isSectionInView(el: HTMLElement) {
+  const rect = el.getBoundingClientRect();
+  return rect.top < window.innerHeight * 0.8 && rect.bottom > window.innerHeight * 0.15;
+}
+
 export function Results() {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, {
-    once: true,
-    amount: 0.2,
-    margin: "0px 0px 0px 0px",
-  });
+  const [countersStarted, setCountersStarted] = useState(false);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const check = () => {
+      if (isSectionInView(section)) {
+        setCountersStarted(true);
+      }
+    };
+
+    check();
+    window.addEventListener("scroll", check, { passive: true });
+    window.addEventListener("outfyre:scroll-ready", check);
+    const retry = window.setTimeout(check, 500);
+
+    return () => {
+      window.removeEventListener("scroll", check);
+      window.removeEventListener("outfyre:scroll-ready", check);
+      window.clearTimeout(retry);
+    };
+  }, []);
 
   return (
     <section id="results" ref={sectionRef} className="section-padding relative">
@@ -37,7 +59,7 @@ export function Results() {
                       value={metric.value}
                       suffix={metric.suffix}
                       decimals={metric.decimals}
-                      start={isInView}
+                      start={countersStarted}
                     />
                   </div>
                   <p className="text-muted text-sm leading-relaxed">
